@@ -1,0 +1,1664 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YWU | Writeup Manager</title>
+    <link rel="icon" href="icon2.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="min-h-screen">
+    <div id="overlay" onclick="closeSidebar()"></div>
+
+    <div class="flex h-screen overflow-hidden">
+      <!-- SIDEBAR -->
+      <aside id="sidebar" class="collapsed flex flex-col overflow-hidden">
+        <div class="px-5 pt-6 pb-4 flex-shrink-0">
+          <div class="flex items-center gap-2 mb-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-file-check-corner-icon lucide-file-check-corner"
+            >
+              <path
+                d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"
+              />
+              <path d="M14 2v5a1 1 0 0 0 1 1h5" />
+              <path d="m14 20 2 2 4-4" />
+            </svg>
+            <div>
+              <div
+                class="text-xs mono text-cyan-400 tracking-widest uppercase leading-none"
+              >
+                Your
+              </div>
+              <div
+                class="text-base font-bold text-white leading-tight tracking-tight"
+              >
+                Write Up <span class="cursor">█</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 mt-3 ml-0.5">
+            <span
+              class="w-1.5 h-1.5 rounded-full bg-emerald-400 live-dot"
+            ></span>
+            <span class="text-xs mono text-slate-500">11 writeups saved</span>
+          </div>
+        </div>
+        <div class="mx-5 border-t border-slate-800 mb-4"></div>
+        <div class="px-4 flex-shrink-0">
+          <button
+            onclick="alert('Add Platform modal – coming soon!')"
+            class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-cyan-400/10 border border-cyan-400/25 text-cyan-400 text-sm font-semibold hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-all duration-200 group"
+          >
+            <svg
+              class="w-4 h-4 group-hover:rotate-90 transition-transform duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            Add Platform
+          </button>
+        </div>
+        <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+          <div class="px-2 mb-2">
+            <span class="text-xs mono text-slate-600 uppercase tracking-widest"
+              >Platforms</span
+            >
+          </div>
+
+          <!-- OTW -->
+          <div>
+            <button
+              onclick="togglePlatform('otw')"
+              class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-800/80 text-slate-300 hover:text-white transition-all duration-150 group"
+            >
+              <div class="flex items-center gap-2.5">
+                <div
+                  class="w-6 h-6 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-emerald-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                    />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium">Over The Wire</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs mono text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded-md"
+                  >1</span
+                >
+                <svg
+                  id="chevron-otw"
+                  class="chevron w-3.5 h-3.5 text-slate-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </button>
+            <div id="list-otw" class="platform-list pl-4">
+              <div class="border-l border-slate-800 pl-3 mt-1 space-y-0.5 pb-1">
+                <a
+                  href="#"
+                  onclick="openWriteup('Bandit | Lv 0')"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>Bandit | Lv 0 </span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <!-- Add writeup -->
+                <button
+                  class="w-full flex items-center gap-1.5 px-2 py-1.5 text-xs mono text-slate-600 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-all duration-150 mt-0.5"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Add Writeup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- HTB -->
+          <div>
+            <button
+              onclick="togglePlatform('htb')"
+              class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-800/80 text-slate-300 hover:text-white transition-all duration-150 group"
+            >
+              <div class="flex items-center gap-2.5">
+                <div
+                  class="w-6 h-6 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-emerald-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                    />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium">Hack The Box</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs mono text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded-md"
+                  >2</span
+                >
+                <svg
+                  id="chevron-htb"
+                  class="chevron w-3.5 h-3.5 text-slate-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </button>
+            <div id="list-htb" class="platform-list pl-4">
+              <div class="border-l border-slate-800 pl-3 mt-1 space-y-0.5 pb-1">
+                <a
+                  href="#"
+                  onclick="openWriteup('LazyAdmin')"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>LazyAdmin</span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <a
+                  href="#"
+                  onclick="openWriteup('Optimum')"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>Optimum</span>
+                  <span class="text-xs text-yellow-500/70 mono">Med</span>
+                </a>
+                <!-- Add writeup -->
+                <button
+                  class="w-full flex items-center gap-1.5 px-2 py-1.5 text-xs mono text-slate-600 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-all duration-150 mt-0.5"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Add Writeup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- THM -->
+          <div>
+            <button
+              onclick="togglePlatform('thm')"
+              class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-800/80 text-slate-300 hover:text-white transition-all duration-150 group"
+            >
+              <div class="flex items-center gap-2.5">
+                <div
+                  class="w-6 h-6 rounded-lg bg-red-500/15 border border-red-500/30 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-red-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 3a7 7 0 110 14A7 7 0 0112 5zm0 2a5 5 0 100 10A5 5 0 0012 7z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium">TryHackMe</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs mono text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded-md"
+                  >4</span
+                >
+                <svg
+                  id="chevron-thm"
+                  class="chevron w-3.5 h-3.5 text-slate-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </button>
+            <div id="list-thm" class="platform-list pl-4">
+              <div class="border-l border-slate-800 pl-3 mt-1 space-y-0.5 pb-1">
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>Blue</span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>Pickle Rick</span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>Overpass</span>
+                  <span class="text-xs text-yellow-500/70 mono">Med</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all group"
+                >
+                  <span>RootMe</span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <button
+                  class="w-full flex items-center gap-1.5 px-2 py-1.5 text-xs mono text-slate-600 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-all duration-150 mt-0.5"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Add Writeup
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTFtime -->
+          <div>
+            <button
+              onclick="togglePlatform('ctf')"
+              class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-slate-800/80 text-slate-300 hover:text-white transition-all duration-150 group"
+            >
+              <div class="flex items-center gap-2.5">
+                <div
+                  class="w-6 h-6 rounded-lg bg-violet-500/15 border border-violet-500/30 flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 text-violet-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
+                    />
+                  </svg>
+                </div>
+                <span class="text-sm font-medium">CTFtime</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-xs mono text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded-md"
+                  >3</span
+                >
+                <svg
+                  id="chevron-ctf"
+                  class="chevron w-3.5 h-3.5 text-slate-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </button>
+            <div id="list-ctf" class="platform-list pl-4">
+              <div class="border-l border-slate-800 pl-3 mt-1 space-y-0.5 pb-1">
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all"
+                >
+                  <span>baby pwn</span>
+                  <span class="text-xs text-red-500/70 mono">Hard</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all"
+                >
+                  <span>warmup rev</span>
+                  <span class="text-xs text-yellow-500/70 mono">Med</span>
+                </a>
+                <a
+                  href="#"
+                  class="flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-cyan-300 text-sm transition-all"
+                >
+                  <span>webshell 101</span>
+                  <span class="text-xs text-emerald-500/60 mono">Easy</span>
+                </a>
+                <button
+                  class="w-full flex items-center gap-1.5 px-2 py-1.5 text-xs mono text-slate-600 hover:text-cyan-400 hover:bg-slate-800/50 rounded-lg transition-all duration-150 mt-0.5"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Add Writeup
+                </button>
+              </div>
+            </div>
+          </div>
+        </nav>
+
+        <!-- PROFILE -->
+        <div class="px-4 py-4 border-t border-slate-800/60 flex-shrink-0">
+          <a
+            href="profile.html"
+            class="flex items-center gap-3 hover:cursor-pointer"
+          >
+            <div>
+              <img
+                src="profile.jpg"
+                alt="User Avatar"
+                class="w-8 h-8 rounded-full border-2 border-slate-700"
+              />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div
+                class="text-sm font-semibold text-white leading-none truncate"
+              >
+                Fatih_Hakim
+              </div>
+              <div class="text-xs mono text-slate-500 mt-0.5">Tier: Mythic</div>
+            </div>
+            <button
+              class="w-7 h-7 rounded-lg hover:bg-slate-800 flex items-center justify-center text-slate-500 hover:text-slate-300 transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#9ca3af"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-search-icon lucide-search"
+              >
+                <path d="m21 21-4.34-4.34" />
+                <circle cx="11" cy="11" r="8" />
+              </svg>
+            </button>
+          </a>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main
+        id="mainContent"
+        class="flex-1 flex flex-col min-h-screen overflow-y-auto"
+        style="margin-left: var(--sidebar-w)"
+      >
+        <!-- TOP NAV -->
+        <header
+          class="sticky top-0 z-20 bg-[#020817]/70 backdrop-blur-xl border-b border-slate-800/60 flex-shrink-0"
+        >
+          <div class="px-6 py-3.5 flex items-center gap-4">
+            <!-- Mobile hamburger -->
+            <button
+              id="mobileNav"
+              onclick="openSidebar()"
+              class="p-2 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-white transition-colors md:hidden"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+
+            <!-- Search -->
+            <div class="flex-1 relative max-w-2xl">
+              <svg
+                class="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                id="searchInput"
+                type="text"
+                placeholder="Search writeups, tags, platform, people..."
+                class="w-full pl-11 pr-4 py-2.5 bg-slate-800/60 border border-slate-700/60 rounded-full text-sm text-slate-200 placeholder-slate-500 outline-none focus:bg-slate-800 focus:border-cyan-500/50 transition-all duration-200 mono"
+                oninput="filterCards(this.value)"
+              />
+            </div>
+
+            <!-- Filters -->
+            <div class="hidden sm:flex items-center gap-2">
+              <select
+                onchange="filterBySelect()"
+                class="bg-slate-800/70 border border-slate-700/60 rounded-xl px-3 py-2 text-xs mono text-slate-400 outline-none hover:border-slate-600 focus:border-cyan-500/50 cursor-pointer transition-colors appearance-none pr-7"
+              >
+                <option value="">All Platforms</option>
+                <option value="HTB">Hack The Box</option>
+                <option value="THM">TryHackMe</option>
+                <option value="CTFtime">CTFtime</option>
+              </select>
+              <select
+                onchange="filterBySelect()"
+                class="bg-slate-800/70 border border-slate-700/60 rounded-xl px-3 py-2 text-xs mono text-slate-400 outline-none hover:border-slate-600 focus:border-cyan-500/50 cursor-pointer transition-colors appearance-none pr-7"
+              >
+                <option value="">Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+              </select>
+              <select
+                onchange="filterBySelect()"
+                class="bg-slate-800/70 border border-slate-700/60 rounded-xl px-3 py-2 text-xs mono text-slate-400 outline-none hover:border-slate-600 focus:border-cyan-500/50 cursor-pointer transition-colors appearance-none pr-7"
+              >
+                <option value="">Category</option>
+                <option value="Web">Web</option>
+                <option value="Pwn">Pwn</option>
+                <option value="Rev">Rev</option>
+                <option value="Crypto">Crypto</option>
+                <option value="OSINT">OSINT</option>
+              </select>
+            </div>
+          </div>
+        </header>
+
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboardView" class="flex-1 p-6">
+          <div class="flex items-end justify-between mb-6">
+            <div>
+              <h1 class="text-2xl font-bold text-white tracking-tight">
+                Explore Writeups
+              </h1>
+              <p class="text-sm text-slate-500 mt-1 mono">
+                Showing <span class="text-cyan-400">12</span> results across 3
+                platforms
+              </p>
+            </div>
+            <button
+              onclick="newWriteup('New')"
+              class="group flex items-center gap-2 px-4 py-2 bg-cyan-400/10 hover:bg-cyan-400/20 border border-cyan-400/30 hover:border-cyan-400/60 rounded-xl text-cyan-400 text-sm font-semibold transition-all duration-200"
+            >
+              <svg
+                class="w-4 h-4 group-hover:rotate-90 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              New Writeup
+            </button>
+          </div>
+          <div
+            id="cardsGrid"
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+          >
+            <!-- Card 1 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+              onclick="openWriteup('LazyAdmin')"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold"
+                    >HTB</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    >Easy</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Web</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                LazyAdmin
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  2.4k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  Fatih_Hakim
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('LazyAdmin');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+
+            <!-- Card 2 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+              onclick="openWriteup('Optimum')"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold"
+                    >HTB</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-yellow-500/10 text-yellow-400 border border-yellow-500/20"
+                    >Medium</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Rev</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                Optimum
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  3.1k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  Fatih_Hakim
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('Optimum');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+
+            <!-- Card 3 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20 font-semibold"
+                    >THM</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    >Easy</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Pwn</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                Blue
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  5.7k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  r00t_h4ck3r
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('Blue');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+
+            <!-- Card 4 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20 font-semibold"
+                    >THM</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    >Easy</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Web</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                Pickle Rick
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  8.2k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  Fatih_Hakim
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('Pickle Rick');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+
+            <!-- Card 5 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-violet-500/10 text-violet-400 border border-violet-500/20 font-semibold"
+                    >CTF</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20"
+                    >Hard</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Pwn</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                baby pwn
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  1.2k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  pwn_wizard
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('baby pwn');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+
+            <!-- Card 6 -->
+            <div
+              class="writeup-card bg-slate-900 border border-slate-800 rounded-2xl p-5 cursor-pointer group"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold"
+                    >HTB</span
+                  >
+                  <span
+                    class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                    >Easy</span
+                  >
+                </div>
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-slate-800 text-slate-500 border border-slate-700"
+                  >Crypto</span
+                >
+              </div>
+              <h3
+                class="text-base font-bold text-white group-hover:text-cyan-300 transition-colors mb-1"
+              >
+                Bank
+              </h3>
+              <p class="text-xs text-slate-500 mono mb-3 line-clamp-2">
+                This is a description for this writeup card. It gives a brief
+                overview of the content.
+              </p>
+              <div
+                class="flex items-center justify-between text-xs mono text-slate-600"
+              >
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-eye-icon lucide-eye"
+                  >
+                    <path
+                      d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  4.8k views
+                </span>
+                <span class="flex items-center gap-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                  >
+                    <path d="M18 20a6 6 0 0 0-12 0" />
+                    <circle cx="12" cy="10" r="4" />
+                    <circle cx="12" cy="12" r="10" />
+                  </svg>
+                  n3t_s3cur3
+                </span>
+              </div>
+              <button
+                onclick="
+                  event.stopPropagation();
+                  openWriteup('Bank');
+                "
+                class="w-full mt-4 py-2 rounded-xl bg-slate-800 hover:bg-cyan-400/10 text-slate-400 hover:text-cyan-400 border border-slate-700 hover:border-cyan-400/30 text-xs mono font-semibold transition-all duration-200"
+              >
+                Read Writeup →
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- /dashboardView -->
+
+        <!-- DETAIL VIEW -->
+        <div id="detailView" class="flex-1 p-6">
+          <button
+            onclick="closeDashboard()"
+            class="flex items-center gap-2 text-sm mono text-slate-500 hover:text-cyan-400 mb-6 transition-colors group"
+          >
+            <svg
+              class="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to all writeups
+          </button>
+
+          <!-- Header -->
+          <div class="mb-8">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span
+                class="tag px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold"
+                >HTB</span
+              >
+              <span
+                class="tag px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >Easy</span
+              >
+              <span
+                class="tag px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 border border-slate-700"
+                >Web</span
+              >
+              <span
+                class="tag px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                >Enumeration</span
+              >
+              <span
+                class="tag px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                >CMS Exploit</span
+              >
+            </div>
+            <h1
+              id="detailTitle"
+              class="text-3xl font-extrabold text-white tracking-tight mb-2"
+            >
+              LazyAdmin
+            </h1>
+            <div
+              class="flex flex-wrap items-center gap-4 text-xs mono text-slate-500"
+            >
+              <span class="flex items-center gap-1.5">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-circle-user-round-icon lucide-circle-user-round"
+                >
+                  <path d="M18 20a6 6 0 0 0-12 0" />
+                  <circle cx="12" cy="10" r="4" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+                Fatih_Hakim
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg
+                  class="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                Jan 15, 2025
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg
+                  class="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                2,412 views
+              </span>
+              <span class="flex items-center gap-1.5">
+                <svg
+                  class="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                ~30 min read
+              </span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div
+            class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 max-w-4xl"
+          >
+            <!-- Section: Recon -->
+            <div>
+              <h2
+                class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-cyan-400 text-xs mono font-bold"
+                  >1</span
+                >
+                This is Step 1
+              </h2>
+              <p class="text-sm text-slate-400 leading-relaxed mono">
+                You can write the content of your writeup here. This section can
+                include some details such as the number or IP address
+                <span class="text-cyan-300">10.10.10.10</span>.
+              </p>
+            </div>
+
+            <!-- Code block 1 -->
+            <div class="relative group/code">
+              <div
+                class="flex items-center justify-between bg-slate-800/80 border border-slate-700 rounded-t-xl px-4 py-2"
+              >
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></div>
+                  <span class="ml-2 text-xs mono text-slate-500">bash</span>
+                </div>
+                <button
+                  onclick="copyCode(this)"
+                  class="flex items-center gap-1.5 text-xs mono text-slate-600 hover:text-cyan-400 transition-colors group-hover/code:opacity-100"
+                >
+                  <svg
+                    class="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Copy
+                </button>
+              </div>
+              <pre
+                class="code-block rounded-b-xl p-4 overflow-x-auto text-slate-300"
+              ><code><span class="text-slate-500"># Some comment here</span>
+<span class="text-cyan-400">command</span> -option file.* <span class="text-yellow-300">[port/IP/MAC]</span></code></pre>
+            </div>
+            <!-- Step 2 -->
+            <div>
+              <h2
+                class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-cyan-400 text-xs mono font-bold"
+                  >2</span
+                >
+                This is Step 2
+              </h2>
+              <p class="text-sm text-slate-400 leading-relaxed mono">
+                You can write the content of your writeup here include what
+                <span class="text-cyan-300">tools</span> do you use and what
+                results you get.
+                <span class="text-cyan-300">some blue text</span> running
+                <span class="text-emerald-400">some green text</span>.
+              </p>
+            </div>
+            <!-- Code block 2 -->
+            <div class="relative group/code">
+              <div
+                class="flex items-center justify-between bg-slate-800/80 border border-slate-700 rounded-t-xl px-4 py-2"
+              >
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></div>
+                  <span class="ml-2 text-xs mono text-slate-500">bash</span>
+                </div>
+                <button
+                  onclick="copyCode(this)"
+                  class="flex items-center gap-1.5 text-xs mono text-slate-600 hover:text-cyan-400 transition-colors opacity-0 group-hover/code:opacity-100"
+                >
+                  <svg
+                    class="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Copy
+                </button>
+              </div>
+              <pre
+                class="code-block rounded-b-xl p-4 overflow-x-auto text-slate-300"
+              ><code><span class="text-cyan-400">tools</span> dir -option
+  -option some/directory
+
+<span class="text-emerald-400">/some green text</span>         (description) </code></pre>
+            </div>
+
+            <!-- Step 3 -->
+            <div>
+              <h2
+                class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-cyan-400 text-xs mono font-bold"
+                  >3</span
+                >
+                This is Step 3
+              </h2>
+              <p class="text-sm text-slate-400 leading-relaxed mono">
+                You can write the content of your writeup here include how you
+                get the foothold and what you do after that. You can also
+                include some details such as the user you are running as, for
+                example
+                <span class="text-yellow-300">www-data</span>.
+              </p>
+            </div>
+
+            <!-- Code block 3 -->
+            <div class="relative group/code">
+              <div
+                class="flex items-center justify-between bg-slate-800/80 border border-slate-700 rounded-t-xl px-4 py-2"
+              >
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></div>
+                  <span class="ml-2 text-xs mono text-slate-500">bash</span>
+                </div>
+                <button
+                  onclick="copyCode(this)"
+                  class="flex items-center gap-1.5 text-xs mono text-slate-600 hover:text-cyan-400 transition-colors opacity-0 group-hover/code:opacity-100"
+                >
+                  <svg
+                    class="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Copy
+                </button>
+              </div>
+              <pre
+                class="code-block rounded-b-xl p-4 overflow-x-auto text-slate-300"
+              ><code><span class="text-slate-500"># Some comment here</span>
+<span class="text-cyan-400">tools</span> -option <span class="text-yellow-300">some yellow text</span>
+
+<span class="text-slate-500"># Some comment here</span>
+<span class="text-cyan-400">tools</span> http://Link/some/directory/.file
+
+<span class="text-slate-500"># Some comment here</span>
+<span class="text-emerald-400">your@profileName</span>:/some/directory$</code></pre>
+            </div>
+
+            <!-- Flag -->
+            <div
+              class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 flex items-center gap-3"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-4 h-4 text-emerald-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div
+                  class="text-xs mono text-emerald-500 uppercase tracking-widest mb-0.5"
+                >
+                  Flag Captured
+                </div>
+                <div class="text-sm mono text-emerald-300 tracking-wider">
+                  FLG{••••••••••••••••••••••••••••••}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /content box -->
+        </div>
+        <!-- /detailView -->
+
+        <!-- ADD NEW VIEW -->
+        <div id="newView" class="flex-1 p-6">
+          <button
+            onclick="closeDashboard()"
+            class="flex items-center gap-2 text-sm mono text-slate-500 hover:text-cyan-400 mb-6 transition-colors group"
+          >
+            <svg
+              class="w-4 h-4 group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to all writeups
+          </button>
+
+          <!-- Header -->
+          <div class="mb-8 cursor-default">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <button
+                class="tag px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold"
+              >
+                + Platform
+              </button>
+              <button
+                class="tag px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              >
+                + Level
+              </button>
+              <button
+                class="tag px-2.5 py-1 rounded-lg bg-slate-800 text-slate-400 border border-slate-700"
+              >
+                + Category
+              </button>
+              <button
+                class="tag px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+              >
+                + Specific
+              </button>
+            </div>
+            <h1
+              id="newTitle"
+              class="text-3xl font-extrabold text-white tracking-tight mb-2 cursor-text"
+            >
+              Untitled
+            </h1>
+            <div
+              class="flex flex-wrap items-center gap-4 text-xs mono text-slate-500"
+            >
+              Description of the writeup goes here.
+            </div>
+          </div>
+          <div
+            class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-6 max-w-4xl"
+          >
+            <div>
+              <h2
+                class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+              >
+                <span
+                  class="w-6 h-6 rounded-lg bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-cyan-400 text-xs mono font-bold"
+                  >1</span
+                >
+                Step 1
+              </h2>
+              <p class="text-sm text-slate-400 leading-relaxed mono">...</p>
+            </div>
+
+            <!-- Code block 1 -->
+            <div class="relative group/code">
+              <div
+                class="flex items-center justify-between bg-slate-800/80 border border-slate-700 rounded-t-xl px-4 py-2"
+              >
+                <div class="flex items-center gap-2">
+                  <div class="w-2.5 h-2.5 rounded-full bg-red-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></div>
+                  <div class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></div>
+                  <span class="ml-2 text-xs mono text-slate-500"
+                    >File name</span
+                  >
+                </div>
+              </div>
+              <pre
+                class="code-block rounded-b-xl p-4 overflow-x-auto text-slate-300 hover:typewriter"
+              ><code>Put code Here...</code></pre>
+            </div>
+
+            <!-- Add Step -->
+            <div>
+              <button
+                class="text-lg font-bold text-white mb-3 flex items-center gap-2"
+              >
+                <span
+                  class="p-1 rounded-lg bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-cyan-400 text-xs mono font-bold"
+                >
+                  + Add Step</span
+                >
+              </button>
+            </div>
+            <!-- Flag -->
+            <div
+              class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-4 flex items-center gap-3"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-emerald-500/15 flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-4 h-4 text-emerald-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div class="cursor-default">
+                <div
+                  class="text-xs mono text-emerald-500 uppercase tracking-widest mb-0.5"
+                >
+                  Write Flag Here
+                </div>
+                <div
+                  class="text-sm mono text-emerald-300 tracking-wider cursor-text"
+                >
+                  FLAG{}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /content box -->
+        </div>
+        <!-- /add new view -->
+      </main>
+    </div>
+    <!-- /layout -->
+
+    <script>
+      function togglePlatform(id) {
+        const list = document.getElementById("list-" + id);
+        const chev = document.getElementById("chevron-" + id);
+        const isOpen = list.classList.contains("open");
+        list.classList.toggle("open", !isOpen);
+        chev.classList.toggle("open", !isOpen);
+      }
+
+      function openSidebar() {
+        document.getElementById("sidebar").classList.remove("collapsed");
+        document.getElementById("overlay").classList.add("show");
+      }
+      function closeSidebar() {
+        document.getElementById("sidebar").classList.add("collapsed");
+        document.getElementById("overlay").classList.remove("show");
+      }
+
+      function openWriteup(name) {
+        document.getElementById("dashboardView").style.display = "none";
+        const dv = document.getElementById("detailView");
+        dv.classList.add("show");
+        if (name) document.getElementById("detailTitle").textContent = name;
+        window.scrollTo(0, 0);
+      }
+      function newWriteup(name) {
+        document.getElementById("dashboardView").style.display = "none";
+        const dv = document.getElementById("newView");
+        dv.classList.add("show");
+        if (name) document.getElementById("detailTitle").textContent = name;
+        window.scrollTo(0, 0);
+      }
+      function closeDashboard() {
+        document.getElementById("detailView").classList.remove("show");
+        document.getElementById("newView").classList.remove("show");
+
+        document.getElementById("dashboardView").style.display = "block";
+
+        window.scrollTo(0, 0);
+      }
+
+      function copyCode(btn) {
+        const pre = btn.closest(".group\\/code").querySelector("pre");
+        navigator.clipboard.writeText(pre.innerText).then(() => {
+          btn.textContent = "✓ Copied";
+          setTimeout(() => {
+            btn.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> Copy`;
+          }, 1500);
+        });
+      }
+
+      function filterCards(query) {
+        const q = query.toLowerCase();
+        document.querySelectorAll("#cardsGrid > div").forEach((card) => {
+          const text = card.innerText.toLowerCase();
+          card.style.display = text.includes(q) ? "" : "none";
+        });
+      }
+
+      togglePlatform("otw");
+    </script>
+  </body>
+</html>

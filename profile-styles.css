@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap");
+body {
+  font-family: "Syne", sans-serif;
+  background: #020817;
+  color: #e2e8f0;
+}
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e2d45;
+  border-radius: 99px;
+}
+
+.avatar-ring {
+  background: conic-gradient(
+    #22d3ee 0deg,
+    #6366f1 130deg,
+    #10b981 260deg,
+    #22d3ee 360deg
+  );
+  border-radius: 50%;
+  padding: 3px;
+}
+
+.tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.writeup-row {
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.writeup-row:hover {
+  background: rgba(34, 211, 238, 0.04);
+  border-color: rgba(34, 211, 238, 0.2) !important;
+}
+
+.badge-item {
+  transition: transform 0.2s;
+}
+.badge-item:hover {
+  transform: translateY(-2px);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fadeUp 0.5s ease forwards;
+  opacity: 0;
+}
+.d1 {
+  animation-delay: 0.05s;
+}
+.d2 {
+  animation-delay: 0.15s;
+}
+.d3 {
+  animation-delay: 0.25s;
+}
+.d4 {
+  animation-delay: 0.35s;
+}

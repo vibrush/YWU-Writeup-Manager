@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YWU | Writeup Manager</title>
+    <link rel="icon" href="icon2.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="profile-styles.css" />
+  </head>
+  <body class="min-h-screen flex flex-col items-center justify-start pt-8 px-4">
+    <!-- Back Button -->
+    <div class="w-full max-w-md md:max-w-4xl mb-6 fade-up">
+      <a
+        href="index.html"
+        class="inline-flex items-center gap-2 text-xs mono text-slate-500 hover:text-cyan-400 transition-colors group"
+      >
+        <svg
+          class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+        Back to Dashboard
+      </a>
+    </div>
+
+    <div
+      class="w-full max-w-md md:max-w-4xl flex flex-col md:flex-row md:items-stretch gap-4 fade-up d1"
+    >
+      <div
+        class="w-full md:w-80 md:flex-shrink-0 bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden"
+      >
+        <div
+          class="relative h-28"
+          style="
+            background:
+              radial-gradient(
+                ellipse 100% 120% at 50% 100%,
+                rgba(34, 211, 238, 0.18) 0%,
+                transparent 65%
+              ),
+              linear-gradient(135deg, #0d1b2e 0%, #0a1020 100%);
+          "
+        >
+          <div
+            class="absolute inset-0"
+            style="
+              background-image:
+                linear-gradient(rgba(34, 211, 238, 0.05) 1px, transparent 1px),
+                linear-gradient(
+                  90deg,
+                  rgba(34, 211, 238, 0.05) 1px,
+                  transparent 1px
+                );
+              background-size: 32px 32px;
+            "
+          ></div>
+          <div class="absolute top-4 right-4 flex items-center gap-2">
+            <button
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/70 border border-slate-700/60 text-xs mono text-slate-400 hover:text-white hover:border-slate-600 transition-all backdrop-blur-sm"
+            >
+              <svg
+                class="w-3 h-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+              Edit
+            </button>
+            <button
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800/70 border border-slate-700/60 text-xs mono text-slate-400 hover:text-white hover:border-slate-600 transition-all backdrop-blur-sm"
+            >
+              <svg
+                class="w-3 h-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                />
+              </svg>
+              Share
+            </button>
+          </div>
+
+          <!-- PP -->
+          <div class="absolute -bottom-10 left-6">
+            <div class="avatar-ring w-20 h-20">
+              <div class="bg-slate-900 rounded-full p-0.5 w-full h-full">
+                <img
+                  src="profile.jpg"
+                  class="rounded-full w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+          <h1
+            class="absolute -bottom-0 right-6 text-md font-extrabold text-white tracking-tight"
+          >
+            Fatih_Hakim
+          </h1>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="pt-14 px-6 pb-12 border-slate-800">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="flex items-center gap-2 mb-1 flex-wrap">
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-violet-500/10 text-violet-300 border border-violet-500/20 font-semibold"
+                  >Ethical Hacker</span
+                >
+                <span
+                  class="tag px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"
+                  >Rank: Mythic #14</span
+                >
+              </div>
+              <p class="text-xs mono text-slate-500 mt-0.5">
+                Muhammad Fatih Alhakim · Malang, ID
+              </p>
+            </div>
+          </div>
+          <a
+            class="flex items-center gap-2 mt-3"
+            href="https://github.com/vibrush"
+            target="_blank"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="#ffffff"
+              stroke="none"
+            >
+              <path
+                d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+              />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+            <span>· vibrush</span>
+          </a>
+          <p class="text-sm text-slate-400 leading-relaxed mt-3">
+            Penetration tester & CTF enthusiast. I love breaking web apps,
+            chaining exploits, and documenting every step.
+          </p>
+
+          <div class="flex flex-col items-start gap-1.5 mt-4">
+            <span
+              class="tag px-2 py-1 rounded-md bg-slate-800 text-slate-400 border border-slate-700/60"
+              >Web Exploit</span
+            >
+            <span
+              class="tag px-2 py-1 rounded-md bg-slate-800 text-slate-400 border border-slate-700/60"
+              >Pwn</span
+            >
+            <span
+              class="tag px-2 py-1 rounded-md bg-slate-800 text-slate-400 border border-slate-700/60"
+              >OSINT</span
+            >
+          </div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="mb-0 grid grid-cols-4 fade-up d2">
+          <div class="stat-item px-3 py-4 text-center cursor-default">
+            <div class="text-md font-extrabold text-white mono">11</div>
+            <div class="text-xs mono text-slate-500 mt-0.5">Writeups</div>
+          </div>
+          <div class="stat-item px-3 py-4 text-center cursor-default">
+            <div class="text-md font-extrabold text-cyan-400 mono">24.7k</div>
+            <div class="text-xs mono text-slate-500 mt-0.5">Views</div>
+          </div>
+          <div class="stat-item px-3 py-4 text-center cursor-default">
+            <div class="text-md font-extrabold text-violet-400 mono">8</div>
+            <div class="text-xs mono text-slate-500 mt-0.5">Badges</div>
+          </div>
+          <div class="stat-item px-3 py-4 text-center cursor-default">
+            <div class="text-md font-extrabold text-yellow-400 mono">99🔥</div>
+            <div class="text-xs mono text-slate-500 mt-0.5">Streak</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 flex flex-col gap-4">
+        <!-- Recent Writeups card -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-3xl px-6 py-5 fade-up d3"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-xs mono text-slate-500 uppercase tracking-widest">
+              Recent Writeups
+            </h2>
+            <span class="text-xs mono text-slate-600">last 30 days</span>
+          </div>
+          <div class="space-y-1.5">
+            <div
+              class="writeup-row flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent cursor-pointer"
+            >
+              <div
+                class="w-7 h-7 rounded-md bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0"
+              >
+                <span
+                  class="text-emerald-400 mono font-bold"
+                  style="font-size: 9px"
+                  >HTB</span
+                >
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-white">LazyAdmin</div>
+                <div class="text-xs mono text-slate-500">Web · 2 days ago</div>
+              </div>
+              <span
+                class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >Easy</span
+              >
+              <span class="text-xs mono text-slate-600">2.4k</span>
+            </div>
+
+            <div
+              class="writeup-row flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent cursor-pointer"
+            >
+              <div
+                class="w-7 h-7 rounded-md bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center flex-shrink-0"
+              >
+                <span
+                  class="text-emerald-400 mono font-bold"
+                  style="font-size: 9px"
+                  >HTB</span
+                >
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-white">Optimum</div>
+                <div class="text-xs mono text-slate-500">Rev · 5 days ago</div>
+              </div>
+              <span
+                class="tag px-2 py-0.5 rounded-md bg-yellow-500/10 text-yellow-400 border border-yellow-500/20"
+                >Med</span
+              >
+              <span class="text-xs mono text-slate-600">3.1k</span>
+            </div>
+
+            <div
+              class="writeup-row flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent cursor-pointer"
+            >
+              <div
+                class="w-7 h-7 rounded-md bg-violet-500/10 border border-violet-500/20 flex items-center justify-center flex-shrink-0"
+              >
+                <span
+                  class="text-violet-400 mono font-bold"
+                  style="font-size: 9px"
+                  >CTF</span
+                >
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-white">baby pwn</div>
+                <div class="text-xs mono text-slate-500">Pwn · 1 week ago</div>
+              </div>
+              <span
+                class="tag px-2 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/20"
+                >Hard</span
+              >
+              <span class="text-xs mono text-slate-600">1.2k</span>
+            </div>
+
+            <div
+              class="writeup-row flex items-center gap-3 px-3 py-2.5 rounded-xl border border-transparent cursor-pointer"
+            >
+              <div
+                class="w-7 h-7 rounded-md bg-red-500/10 border border-red-500/20 flex items-center justify-center flex-shrink-0"
+              >
+                <span class="text-red-400 mono font-bold" style="font-size: 9px"
+                  >THM</span
+                >
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="text-sm font-semibold text-white">Pickle Rick</div>
+                <div class="text-xs mono text-slate-500">Web · 2 weeks ago</div>
+              </div>
+              <span
+                class="tag px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >Easy</span
+              >
+              <span class="text-xs mono text-slate-600">8.2k</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievements card -->
+        <div
+          class="bg-slate-900 border border-slate-800 rounded-3xl px-6 py-5 fade-up d4"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-xs mono text-slate-500 uppercase tracking-widest">
+              Achievements
+            </h2>
+            <span class="text-xs mono text-slate-600">8 / 13 earned</span>
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            <div
+              class="badge-item flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/60 border border-cyan-500/20 cursor-default"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-cyan-400/10 flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-cyan-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="text-xs mono text-slate-400 text-center leading-tight"
+                >First Blood</span
+              >
+            </div>
+
+            <div
+              class="badge-item flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/60 border border-emerald-500/20 cursor-default"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-emerald-400/10 flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-emerald-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="text-xs mono text-slate-400 text-center leading-tight"
+                >Perfect 10</span
+              >
+            </div>
+
+            <div
+              class="badge-item flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/60 border border-yellow-500/20 cursor-default"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-yellow-400/10 flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-yellow-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="text-xs mono text-slate-400 text-center leading-tight"
+                >Comm. Star</span
+              >
+            </div>
+
+            <div
+              class="badge-item flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/60 border border-violet-500/20 cursor-default"
+            >
+              <div
+                class="w-8 h-8 rounded-xl bg-violet-400/10 flex items-center justify-center"
+              >
+                <svg
+                  class="w-4 h-4 text-violet-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+              </div>
+              <span
+                class="text-xs mono text-slate-400 text-center leading-tight"
+                >Shell Master</span
+              >
+            </div>
+
+            <!-- Locked row -->
+            <div class="col-span-4 flex gap-2">
+              <div
+                class="flex-1 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/30 border border-slate-800 opacity-40 cursor-default"
+              >
+                <div
+                  class="w-8 h-8 rounded-xl bg-slate-700/40 flex items-center justify-center"
+                >
+                  <svg
+                    class="w-4 h-4 text-slate-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xs mono text-slate-600 text-center"
+                  >CTF Champ</span
+                >
+              </div>
+              <div
+                class="flex-1 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/30 border border-slate-800 opacity-40 cursor-default"
+              >
+                <div
+                  class="w-8 h-8 rounded-xl bg-slate-700/40 flex items-center justify-center"
+                >
+                  <svg
+                    class="w-4 h-4 text-slate-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xs mono text-slate-600 text-center"
+                  >Locked</span
+                >
+              </div>
+              <div
+                class="flex-1 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/30 border border-slate-800 opacity-40 cursor-default"
+              >
+                <div
+                  class="w-8 h-8 rounded-xl bg-slate-700/40 flex items-center justify-center"
+                >
+                  <svg
+                    class="w-4 h-4 text-slate-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xs mono text-slate-600 text-center"
+                  >Locked</span
+                >
+              </div>
+              <div
+                class="flex-1 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-slate-800/30 border border-slate-800 opacity-40 cursor-default"
+              >
+                <div
+                  class="w-8 h-8 rounded-xl bg-slate-700/40 flex items-center justify-center"
+                >
+                  <svg
+                    class="w-4 h-4 text-slate-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </div>
+                <span class="text-xs mono text-slate-600 text-center"
+                  >Locked</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-6 text-xs mono text-slate-700 fade-up d4">
+      YWU | Writeup Manager · copyright &copy; 2026
+    </p>
+  </body>
+</html>

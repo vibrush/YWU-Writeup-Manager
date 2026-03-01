@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&display=swap");
+
+:root {
+  --sidebar-w: 260px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Syne", sans-serif;
+  background: #020817;
+  color: #e2e8f0;
+  overflow-x: hidden;
+}
+
+.mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #22d3ee;
+}
+
+/* Sidebar */
+#sidebar {
+  width: var(--sidebar-w);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #0f1729;
+  border-right: 1px solid #1e2d45;
+}
+
+#sidebar.collapsed {
+  transform: translateX(calc(-1 * var(--sidebar-w)));
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 30;
+  backdrop-filter: blur(2px);
+}
+#overlay.show {
+  display: block;
+}
+
+/* Glow accent */
+.glow-cyan {
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.6);
+}
+.border-glow {
+  box-shadow:
+    0 0 0 1px rgba(34, 211, 238, 0.25),
+    inset 0 0 20px rgba(34, 211, 238, 0.03);
+}
+
+/* Scan line overlay */
+.scanline {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+}
+
+/* Grid card hover */
+.writeup-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+.writeup-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.12);
+  border-color: rgba(34, 211, 238, 0.35);
+}
+
+/* Platform dropdown */
+.platform-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.platform-list.open {
+  max-height: 400px;
+}
+
+.chevron {
+  transition: transform 0.25s ease;
+}
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Code block */
+.code-block {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  background: #050d1a;
+  border: 1px solid #1e2d45;
+}
+
+/* Difficulty bar */
+.diff-bar {
+  height: 4px;
+  border-radius: 99px;
+  background: #1e2d45;
+  overflow: hidden;
+}
+.diff-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* Search focus */
+#searchInput:focus {
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.4);
+}
+
+/* Detail section slide */
+#detailView,
+#newView {
+  display: none;
+}
+#detailView.show,
+#newView.show {
+  display: block;
+}
+
+/* Cursor blink */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
+}
+
+/* Badge pulse */
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.live-dot {
+  animation: pulse-dot 1.5s infinite;
+}
+
+/* Noise texture overlay */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Tag */
+.tag {
+  font-size: 11px;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.04em;
+}
+
+/* Tooltip */
+[data-tip] {
+  position: relative;
+}
+[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e2d45;
+  color: #94a3b8;
+  font-size: 11px;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Mobile nav logic */
+@media (max-width: 768px) {
+  #mobileNav {
+    display: flex; /* Munculkan hamburger di mobile */
+  }
+
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50; /* Pastikan di atas segalanya */
+    transform: translateX(0); /* Posisi normal */
+  }
+
+  /* Saat class .collapsed ada, geser sidebar keluar layar */
+  #sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  #mainContent {
+    margin-left: 0 !important; /* Hilangkan margin di mobile */
+  }
+}
+
+/* Desktop logic (Layar di atas 768px) */
+@media (min-width: 769px) {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(0) !important; /* Selalu muncul di desktop */
+  }
+
+  #mainContent {
+    margin-left: var(--sidebar-w) !important;
+  }
+
+  #overlay {
+    display: none !important; /* Jangan pernah munculkan overlay di desktop */
+  }
+}
